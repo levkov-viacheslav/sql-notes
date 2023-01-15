@@ -1,0 +1,45 @@
+DROP TABLE IF EXISTS book;
+
+DROP TABLE IF EXISTS author;
+
+CREATE TABLE book
+(
+book_id int PRIMARY KEY NOT NULL,
+title text NOT NULL,
+isbn int NOT NULL
+);
+
+CREATE TABLE author
+(
+author_id int PRIMARY KEY NOT NULL,
+name text NOT NULL,
+rate real NOT NULL
+);
+
+INSERT INTO book
+VALUES
+(1,'Sunday', 12345),
+(2, 'Cloud of love', 23456),
+(3, 'Baby shark and friends', 34567);
+
+INSERT INTO author
+VALUES
+(1,'John Smith', 5.0),
+(2, 'Alex Hoffman', 5.0),
+(3, 'Anna Marry', 5.0);
+
+CREATE TABLE book_author
+(
+book_id int REFERENCES book(book_id),
+author_id int REFERENCES author(author_id),
+
+CONSTRAINT book_author_pkey PRIMARY KEY (book_id, author_id) -- composite key
+);
+
+INSERT INTO book_author
+VALUES
+(1,1),
+(1,2),
+(2,2),
+(2,3),
+(3,1);

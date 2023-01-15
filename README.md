@@ -1,0 +1,1 @@
+There are usefull SQL query samples
