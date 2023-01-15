@@ -1,0 +1,13 @@
+SELECT * FROM customers; --select all from customers table
+
+SELECT contact_name, city FROM customers; --select only names, cities from customers table
+
+SELECT order_id, (shipped_date - order_date) FROM orders; -- select the order id and date between shipped date and order date
+
+SELECT DISTINCT city FROM customers; -- select unique cities where are customers from
+
+SELECT DISTINCT city, country FROM customers; --select the unique city-country set from customers table
+
+SELECT COUNT (DISTINCT contact_name) FROM customers; --how many unique customers do we have
+
+SELECT COUNT(DISTINCT country) FROM customers; -- Count the number of unique countries where customers live
