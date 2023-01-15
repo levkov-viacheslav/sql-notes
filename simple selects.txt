@@ -11,3 +11,24 @@ SELECT DISTINCT city, country FROM customers; --select the unique city-country s
 SELECT COUNT (DISTINCT contact_name) FROM customers; --how many unique customers do we have
 
 SELECT COUNT(DISTINCT country) FROM customers; -- Count the number of unique countries where customers live
+
+SELECT DISTINCT country FROM customers ORDER BY country; -- select countries in order (same ORDER BY country ASC)
+
+SELECT DISTINCT country, city FROM customers ORDER BY country DESC, city DESC; -- select countries and cities in reverse order
+
+SELECT order_id FROM orders WHERE ship_country IN ('France', 'Austria', 'Spain'); -- select all orders from France, Austria and Spain countries
+
+SELECT * FROM orders ORDER BY required_date DESC, shipped_date ASC; -- select all orders and sort by required date(reverse) and by shipped date (ASC)
+
+SELECT MIN (unit_price) FROM products WHERE units_in_stock > 30; -- select the min price of the product among those products that are in stock more than 30 units
+
+SELECT MAX(units_in_stock) FROM products WHERE unit_price > 30; -- select the max number of products units amoung those products whose price is more than 30
+
+SELECT AVG(shipped_date - order_date) FROM orders WHERE ship_country='USA'; -- select the avarage value of daysleaving for delivery from the date the order was placed in USA
+
+SELECT SUM(unit_price * units_in_stock) FROM products WHERE discontinued <> 1; --select the sum of all discontinued products
+
+
+
+
+
