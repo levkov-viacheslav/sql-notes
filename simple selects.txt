@@ -29,6 +29,25 @@ SELECT AVG(shipped_date - order_date) FROM orders WHERE ship_country='USA'; -- s
 SELECT SUM(unit_price * units_in_stock) FROM products WHERE discontinued <> 1; --select the sum of all discontinued products
 
 
+-- PATTERN MATCHING WITH LIKE--
+-- % 	placeholder, it means 0, 1 or more symbols
+-- _  only one symbol
+--
+-- examples:
+--
+-- LIKE 'U%'
+-- LIKE '%a'
+-- LIKE '_jo_'
+-- LIKE '_ker%'  etc...
+
+SELECT last_name, first_name FROM  employees WHERE first_name LIKE '%n' -- find all employees whoose name ends with 'n'
+SELECT customer_id FROM customers WHERE phone_number LIKE '+358%' -- find customers from finland (+358 phone's code)
+
+SELECT product_name, unit_price FROM products LIMIT 10 -- find first 10 lines
+
+
+
+
 
 
 
