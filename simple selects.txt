@@ -41,9 +41,81 @@ SELECT SUM(unit_price * units_in_stock) FROM products WHERE discontinued <> 1; -
 -- LIKE '_ker%'  etc...
 
 SELECT last_name, first_name FROM  employees WHERE first_name LIKE '%n' -- find all employees whoose name ends with 'n'
+
 SELECT customer_id FROM customers WHERE phone_number LIKE '+358%' -- find customers from finland (+358 phone's code)
 
 SELECT product_name, unit_price FROM products LIMIT 10 -- find first 10 lines
+
+SELECT contact_name, region FROM customers WHERE region IS NOT null -- check for null
+
+SELECT ship_country, COUNT(*) FROM orders WHERE freight > 50 GROUP BY ship_country ORDER BY COUNT(*) DESC -- Select the number of orders
+ which freight greather than 50 from each country (grouping by order) and sort these
+
+SELECT category_id, SUM(units_in_stock) FROM products GROUP BY category_id ORDER BY SUM(units_in_stock) DESC LIMIT 10
+
+SELECT category_id, SUM(unit_price * units_in_stock) FROM products
+WHERE discontinued <> 1
+GROUP BY category_id
+HAVING SUM(unit_price * units_in_stock) > 5000
+ORDER BY SUM(unit_price * units_in_stock) DESC -- "Having" allows us to add one more condition to in the query
+
+SELECT country FROM customers
+UNION
+SELECT country FROM employees -- Math union of columns (from 2 different tables) without duplicates (use UNION ALL for union with duplicates)
+
+SELECT country FROM customers
+INTERSECT
+SELECT country FROM employees -- Intersection of countries
+
+SELECT country FROM customers
+EXCEPT
+SELECT country FROM suppliers -- Select countries where customers are living, but suppliers are not.
+
+SELECT country FROM customers
+EXCEPT ALL
+SELECT country FROM suppliers -- difference between duplicates (table1 duplicates - table2 duplicates)
+
+--few examples:
+
+SELECT * FROM orders WHERE ship_country LIKE 'U%'
+
+SELECT order_id, customer_id, freight, ship_country FROM orders
+WHERE ship_country LIKE 'N%'
+ORDER BY freight DESC LIMIT 10
+
+SELECT first_name, last_name, home_phone, region FROM employees
+WHERE region IS NULL
+
+SELECT COUNT(*) FROM customers
+WHERE region IS null
+
+SELECT COUNT(*), country FROM suppliers
+GROUP BY country
+ORDER BY COUNT(*) DESC
+
+SELECT ship_country, SUM(freight) FROM orders
+WHERE ship_region IS NOT null
+GROUP BY ship_country
+HAVING SUM(freight) > 2750
+ORDER BY SUM(freight) DESC
+
+SELECT country FROM customers
+UNION
+SELECT country FROM suppliers
+ORDER BY country
+
+SELECT country FROM employees
+INTERSECT
+SELECT country FROM customers
+INTERSECT
+SELECT country FROM suppliers
+
+SELECT country FROM customers
+INTERSECT
+SELECT country FROM suppliers
+EXCEPT
+SELECT country FROM employees
+
 
 
 
