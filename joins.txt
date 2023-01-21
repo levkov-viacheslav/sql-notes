@@ -39,5 +39,26 @@ JOIN customers ON orders.customer_id = customers.customer_id
 JOIN employees ON orders.employee_id = employees.employee_id
 WHERE ship_country = 'USA';
 
+SELECT last_name, first_name -- select all ymployees without order
+FROM employees
+LEFT JOIN orders ON employees.employee_id = orders.employee_id
+WHERE order_id IS NULL
+
+SELECT company_name -- select the companies without orders
+FROM customers
+LEFT JOIN orders ON customers.customer_id = orders.customer_id
+WHERE order_id IS null
+
+SELECT contact_name, company_name, phone, first_name, last_name, title, --(we can replace ON orders.order_id = order_details.order_id on the USING keyword)
+       order_date, product_name, ship_country, products.unit_price, quantity, discount
+FROM orders
+JOIN order_details USING(order_id)
+JOIN products USING(product_id)
+JOIN customers USING(customer_id)
+JOIN employees USING(employee_id)
+WHERE ship_country = 'USA';
+
+--NEVER USE "NATURAL JOIN" PLEASE!--
+
 
 
